@@ -15,7 +15,7 @@ class Game:
         self.x_pos_bg = 0
         self.y_pos_bg = 380
         self.x_pos_cloud = 0
-        self.y_pos_cloud = 380
+        self.y_pos_cloud = 0
         self.player = Dinosaur()
         #self.user_input = 0
 

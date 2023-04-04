@@ -26,13 +26,13 @@ RUNNING_HAMMER = [
     pygame.image.load(os.path.join(IMG_DIR, "Dino/DinoRun2.png")),
 ]
 
-JUMPING = pygame.image.load(os.path.join(IMG_DIR, "Dino/DinoJumpSenior.png"))
+JUMPING = pygame.image.load(os.path.join(IMG_DIR, "Dino/DinoJumpSeniorUmbrella.png"))
 JUMPING_SHIELD = pygame.image.load(os.path.join(IMG_DIR, "Dino/DinoJumpShield.png"))
 JUMPING_HAMMER = pygame.image.load(os.path.join(IMG_DIR, "Dino/DinoJumpHammer.png"))
 
 DUCKING = [
-    pygame.image.load(os.path.join(IMG_DIR, "Dino/DinoDuckSenior.png")),
-    pygame.image.load(os.path.join(IMG_DIR, "Dino/DinoDuck2.png")),
+    pygame.image.load(os.path.join(IMG_DIR, "Dino/DinoDuck1Senior.png")),
+    pygame.image.load(os.path.join(IMG_DIR, "Dino/DinoDuck2Senior.png")),
 ]
 
 DUCKING_SHIELD = [
@@ -59,6 +59,11 @@ LARGE_CACTUS = [
 BIRD = [
     pygame.image.load(os.path.join(IMG_DIR, "Bird/Bird1.png")),
     pygame.image.load(os.path.join(IMG_DIR, "Bird/Bird2.png")),
+]
+
+DEATH = [
+    pygame.image.load(os.path.join(IMG_DIR, "Death/Death1.png")),
+    pygame.image.load(os.path.join(IMG_DIR, "Death/Death2.png")),
 ]
 
 CLOUD = pygame.image.load(os.path.join(IMG_DIR, 'Other/Cloud.png'))

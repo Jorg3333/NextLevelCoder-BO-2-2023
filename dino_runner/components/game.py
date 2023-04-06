@@ -1,7 +1,9 @@
 import pygame
 import random
 from dino_runner.components.obstacles.obstacle_manager import ObstacleManager
-from dino_runner.utils.constants import BG, CLOUD, ICON, SCREEN_HEIGHT, SCREEN_WIDTH, TITLE, FPS, COLORS, RUNNING
+from dino_runner.components.player_hearts.player_heart_manager import PlayerHeartManager
+from dino_runner.components.powerups.power_up_manager import PowerUpManager
+from dino_runner.utils.constants import BG, CLOUD, ICON, SCREEN_HEIGHT, SCREEN_WIDTH, TITLE, FPS, COLORS, RUNNING, GAME_OVER, GAME_START, GAME_DEAD
 from dino_runner.components.dinosaur import Dinosaur
 from dino_runner.components.text_utils import TextUtils
 
@@ -24,6 +26,8 @@ class Game:
         self.points = 0
         self.game_running = True
         self.death_count = 0
+        self.power_up_manager = PowerUpManager()
+        self.player_heart_manager = PlayerHeartManager()
         
     def execute(self):
         while self.game_running:
@@ -33,11 +37,17 @@ class Game:
 
     def run(self):
         # Game loop: events - update - draw
+        self.points = 0
+        self.create_components()
         self.playing = True
         while self.playing:
             self.events()
             self.update()
             self.draw()
+            
+    def create_components(self):
+        self.power_up_manager.reset_power_ups(self.points) #puede ir en Run
+        # self.obstacle_manager.reset_obstacles()
 
     def events(self):
         for event in pygame.event.get():
@@ -48,6 +58,7 @@ class Game:
         user_input = pygame.key.get_pressed()
         self.player.update(user_input)
         self.obstacle_manager.update(self)
+        self.power_up_manager.update(self.points, self.game_speed, self.player)
 
     def draw(self):
         self.clock.tick(FPS)
@@ -56,7 +67,10 @@ class Game:
         self.draw_cloud()
         self.player.draw(self.screen)
         self.obstacle_manager.draw(self.screen)
+        self.player_heart_manager.draw(self.screen)
+        self.power_up_manager.draw(self.screen)
         self.score()
+        self.player.check_lives()
         pygame.display.update()
         pygame.display.flip()
 
@@ -79,10 +93,11 @@ class Game:
             self.y_pos_cloud = random.randint(100, 310)
         self.x_pos_cloud -= self.game_speed
  
-    def score(self):
+    def score(self): #revisar
         self.points += 1 
         text, text_rect = self.text_utils.get_score_element(self.points)
         self.screen.blit(text, text_rect)
+        self.player.check_invincibility(self.screen)
         
     def show_menu(self):
         self.game_running = True       
@@ -118,6 +133,6 @@ class Game:
                pygame.quit()
                exit()
             if event.type == pygame.KEYDOWN:
-                pygame.mixer.music.load("music/JamesBond.mp3")
+                pygame.mixer.music.load("sounds/JamesBond.mp3")
                 pygame.mixer.music.play()
                 self.run()

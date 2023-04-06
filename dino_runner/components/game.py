@@ -67,7 +67,7 @@ class Game:
         self.draw_cloud()
         self.player.draw(self.screen)
         self.obstacle_manager.draw(self.screen)
-        self.player_heart_manager.draw(self.screen)
+        #self.player_heart_manager.draw(self.screen)
         self.power_up_manager.draw(self.screen)
         self.score()
         self.player.check_lives()

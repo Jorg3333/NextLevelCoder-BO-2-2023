@@ -20,7 +20,7 @@ class ObstacleManager:
         for obstacle in self.obstacles:
             obstacle.update(game.game_speed, self.obstacles)
             if game.player.rect.colliderect(obstacle.rect):
-                  if not game.player.shield:
+                if not game.player.shield:
                    if not game.player.has_lives:
                     game.player_heart_manager.reduce_heart_count() #vidas descontando
 
